@@ -1,33 +1,27 @@
 // Logic Challenge - Mengelompokkan Hewan
 function groupAnimals(animals) {
-  var animalName = [];
-  for (var i = 0; i < animals.length; i++) {
-    var animalA = [];
-    var animalC = [];
-    var animalK = [];
-    var animalU = [];
-    
-    for (var j = 0; j < animals.length; j++) {
-      if (animals[j][0] === "u") {
-        animalU.push(animals[j]);
-      } else if (animals[j][0] === "a") {
-        animalA.push(animals[j]);
-      } else if (animals[j][0] === "c") {
-        animalC.push(animals[j]);
-      } else if (animals[j][0] === "k") {
-        animalK.push(animals[j]);
-      } 
+  var animalName = [ [] ];
+  var a = 0;
+  animals.sort();
+  animalName[0].push(animals[0]);
+  for(var i = 1;i<animals.length;i++)
+  {
+    if(animals[i][0] === animalName[a][0][0])
+    {
+      animalName[a].push(animals[i]);
+    }
+    else
+    {
+      a++;
+      animalName[a] = [animals[i]];
     }
   }
-  animalName.push(animalA);
-  animalName.push(animalC);
-  animalName.push(animalK);
-  animalName.push(animalU);
+
   return animalName;
 }
 
 // TEST CASES
 console.log(groupAnimals(['cacing', 'ayam', 'kuda', 'anoa', 'kancil']));
 // [ ['ayam', 'anoa'], ['cacing'], ['kuda', 'kancil'] ]
-console.log(groupAnimals(['cacing', 'ayam', 'kuda', 'anoa', 'kancil', 'unta', 'cicak' ]));
+console.log(groupAnimals(['cacing', 'ayam', 'kuda', 'anoa', 'kancil', 'unta', 'cicak']));
 // [ ['ayam', 'anoa'], ['cacing', 'cicak'], ['kuda', 'kancil'], ['unta'] ]
